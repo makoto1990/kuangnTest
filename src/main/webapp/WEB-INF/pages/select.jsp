@@ -21,8 +21,8 @@
 
   <!-- 新 Bootstrap 核心 CSS 文件 -->
   <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../static/css/bootstrap-datetimepicker.min.css"  media="screen">
-  <link rel="stylesheet" href="../static/css/jquery.tree-multiselect.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap-datetimepicker.min.css"  media="screen">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/jquery.tree-multiselect.min.css">
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,10 +31,10 @@
   <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-  <script type="text/javascript" src="../static/js/jquery/jquery-1.8.3.min.js" charset="UTF-8"></script>
-  <script type="text/javascript" src="../static/js/bootstrap/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="../static/js/jquery-ui.min.js"></script>
-  <script type="text/javascript" src="../static/js/jquery.tree-multiselect.js"></script>
+  <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery/jquery-1.8.3.min.js" charset="UTF-8"></script>
+  <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery.tree-multiselect.js"></script>
 </head>
 
 <body>
@@ -70,12 +70,17 @@
 
 
 <script type="text/javascript">
-  $("#test-select").treeMultiselect({ enableSelectAll: true, sortable: true });
+  obj = $("#test-select").treeMultiselect({ enableSelectAll: true, sortable: true });
+  alert(obj.length);
+
+
 </script>
 
 <script type="text/javascript">
   $(document).ready(function(){
     $("button").click(function(){
+
+    //$("#test-select").UiBuilder()
 
     });
   });

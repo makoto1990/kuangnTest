@@ -2,6 +2,10 @@ body {
 	padding-top: 60px;
 }
 
+.grid{
+	height: 600px;
+}
+
 .loader {
 	font-size: 36px;
 	line-height: 36px;

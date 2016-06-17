@@ -1,23 +1,25 @@
 <div class="page-header">
-	<h3>Case Selector</h3>
+	<h3>测试用例选择工具</h3>
 </div>
 
-<div>
-    {{case_test}}
-	<button type="button" class="btn btn-success" ng-click="toggleMultiSelect()">Toggle multiSelect</button>  <strong>MultiSelect:</strong> <span ng-bind="gridApi.grid.options.multiSelect"></span>
-	<button type="button" class="btn btn-success" ng-click="toggleRow1()">Toggle Row 0</button>
+<div ui-i18n="{{lang}}">
+    <!--{{case_test}}-->
+	<!--<button type="button" class="btn btn-success" ng-click="toggleMultiSelect()">Toggle multiSelect</button>  <strong>MultiSelect:</strong> <span ng-bind="gridApi.grid.options.multiSelect"></span>-->
+	<!--<button type="button" class="btn btn-success" ng-click="toggleRow1()">Toggle Row 0</button>-->
+	<!--<br/>-->
+	<!--<br/>-->
+	<!--<button type="button" class="btn btn-success" ng-click="toggleModifierKeysToMultiSelect()">Toggle modifierKeysToMultiSelect</button>  <strong>ModifierKeysToMultiSelect:</strong> <span ng-bind="gridApi.grid.options.modifierKeysToMultiSelect"> </span>-->
+	<!--<br/>-->
+	<!--<br/>-->
+	<button type="button" class="btn btn-success" ng-disabled="!gridApi.grid.options.multiSelect" ng-click="selectAll()">选择全部用例</button>
+	<button type="button" class="btn btn-success" ng-click="clearAll()">清除所有选中</button>
+	<!--<button type="button" class="btn btn-success" ng-click="setSelectable()">Set Selectable</button>-->
+	<!--<button type="button" class="btn btn-success" ng-click="toggleFullRowSelection()">Toggle full row selection</button>-->
 	<br/>
 	<br/>
-	<button type="button" class="btn btn-success" ng-click="toggleModifierKeysToMultiSelect()">Toggle modifierKeysToMultiSelect</button>  <strong>ModifierKeysToMultiSelect:</strong> <span ng-bind="gridApi.grid.options.modifierKeysToMultiSelect"> </span>
+	<div ui-grid="gridOptions" ui-grid-selection ui-grid-resize-columns class="grid"></div>
 	<br/>
-	<br/>
-	<button type="button" class="btn btn-success" ng-disabled="!gridApi.grid.options.multiSelect" ng-click="selectAll()">Select All</button>
-	<button type="button" class="btn btn-success" ng-click="clearAll()">Clear All</button>
-	<button type="button" class="btn btn-success" ng-click="setSelectable()">Set Selectable</button>
-	<button type="button" class="btn btn-success" ng-click="toggleFullRowSelection()">Toggle full row selection</button>
-	<br/>
-
-	<div ui-grid="gridOptions" ui-grid-selection class="grid"></div>
+	<button type="button" class="btn btn-success pull-right" ng-disabled="selectedRows.length===0" ng-click="downloadSelected()">生成并下载测试用例库</button>
 </div>
 
 

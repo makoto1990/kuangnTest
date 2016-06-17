@@ -1,5 +1,6 @@
 package com.kuangn.ts_server.rest.resources;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -17,10 +18,16 @@ import com.kuangn.ts_server.JsonViews;
 import com.kuangn.ts_server.dao.testcase.TestCaseDao;
 import com.kuangn.ts_server.entity.Role;
 import com.kuangn.ts_server.entity.TestCase;
+import com.kuangn.ts_server.utils.GitHelper;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.PullCommand;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.internal.storage.file.FileRepository;
+import org.eclipse.jgit.lib.Repository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +52,16 @@ public class TestCaseResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String list() throws JsonGenerationException, JsonMappingException, IOException
-    {
+    public String list() throws JsonGenerationException, JsonMappingException, IOException, GitAPIException {
         this.logger.info("list()");
+
+//        this.logger.info("git pull started ....");
+//
+//        String testCaseString = new GitHelper().getTestCaseJsonString("\\testcase.json");
+//
+//        this.logger.info("git pull finished ....");
+//
+//        return testCaseString;
 
         ObjectWriter viewWriter;
         if (this.isAdmin()) {

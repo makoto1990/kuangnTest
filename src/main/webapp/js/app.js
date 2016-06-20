@@ -4,7 +4,8 @@ var app = angular.module('exampleApp', [
     'exampleApp.services',
     'ngTouch',
     'ui.grid',
-    'ui.grid.selection'
+    'ui.grid.selection',
+	'ui.grid.resizeColumns'
 ])
     .config(
 		[ '$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {

@@ -5,7 +5,8 @@ var app = angular.module('exampleApp', [
     'ngTouch',
     'ui.grid',
     'ui.grid.selection',
-	'ui.grid.resizeColumns'
+	'ui.grid.resizeColumns',
+	'darthwade.dwLoading'
 ])
     .config(
 		[ '$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {

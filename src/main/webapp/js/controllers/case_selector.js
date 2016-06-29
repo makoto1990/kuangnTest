@@ -3,7 +3,8 @@
  */
 
 
-function CaseSelectorController($scope, $rootScope, $location, $cookieStore, $http, $log, $timeout, i18nService, uiGridConstants){
+function CaseSelectorController($scope, $rootScope, $location, $cookieStore, $http, $log, $timeout,
+                                i18nService, uiGridConstants, $loading){
     $scope.langs = i18nService.getAllLangs();
     $scope.lang = 'zh-cn';
 
@@ -39,21 +40,6 @@ function CaseSelectorController($scope, $rootScope, $location, $cookieStore, $ht
     ];
 
     $scope.gridOptions.multiSelect = true;
-
-    $http.get('/rest/git-repo?pull=false')
-        .success(function(data) {
-            $scope.gridOptions.data = data;
-        });
-
-    // $http.get('/data/500_complex.json')
-    //     .success(function(data) {
-    //         $scope.gridOptions.data = data;
-    //         $timeout(function() {
-    //             if($scope.gridApi.selection.selectRow){
-    //                 $scope.gridApi.selection.selectRow($scope.gridOptions.data[0]);
-    //             }
-    //         });
-    //     });
 
     $scope.info = {};
 
@@ -128,4 +114,13 @@ function CaseSelectorController($scope, $rootScope, $location, $cookieStore, $ht
             $scope.updateSelectedRows();
         });
     };
+
+    /** -------------------------------      START CODE      ------------------------------- */
+    $loading.start('grid_loading');
+    $http.get('rest/git-repo') //?pull=false
+        .success(function(data) {
+            $scope.gridOptions.data = data;
+            $loading.finish('grid_loading');
+        });
+
 };

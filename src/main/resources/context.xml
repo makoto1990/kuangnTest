@@ -99,6 +99,7 @@
 		<security:csrf disabled="true"/>
 		<security:custom-filter ref="authenticationTokenProcessingFilter" position="PRE_AUTH_FILTER" />
 		<security:intercept-url pattern="/rest/user/authenticate" access="permitAll" />
+		<security:intercept-url method="GET" pattern="/rest/git-repo/**" access="hasRole('USER')" />
 		<security:intercept-url method="GET" pattern="/rest/news/**" access="hasRole('USER')" />
 		<security:intercept-url method="PUT" pattern="/rest/news/**" access="hasRole('ADMIN')" />
 		<security:intercept-url method="POST" pattern="/rest/news/**" access="hasRole('ADMIN')" />

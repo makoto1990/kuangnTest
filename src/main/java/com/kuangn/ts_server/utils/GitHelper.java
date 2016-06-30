@@ -15,7 +15,8 @@ import java.io.*;
  */
 public class GitHelper {
 
-    private String localPath = "E:\\testcases_repo";
+    // configurations need be removed to outer xml file
+    private String localPath = "/root/git_repo/ts-testcases";// "E:\\testcases_repo";
     private String existedTestCaseFile = "testcase.json";
     private String generatedTestCaseFile = "testcase2.json";
     private String remotePath = "git@172.17.3.60:ts-protocol/ts-testcases.git";
@@ -85,8 +86,8 @@ public class GitHelper {
     }
 
     public String getCombinedTestCaseJsonString() throws IOException {
-        String content1 = getTestCaseJsonString("\\" + existedTestCaseFile);
-        String content2 = getTestCaseJsonString("\\" + generatedTestCaseFile);
+        String content1 = getTestCaseJsonString("/" + existedTestCaseFile);
+        String content2 = getTestCaseJsonString("/" + generatedTestCaseFile);
 
         if(content1 == null && content2 == null){
             return "[]";

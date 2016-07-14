@@ -7,8 +7,18 @@ function CaseSelectorController($scope, $rootScope, $location, $cookieStore, $ht
                                 i18nService, uiGridConstants, $loading){
     $scope.langs = i18nService.getAllLangs();
     $scope.lang = 'zh-cn';
-
+    // $scope.gmtDate = null;
+    $scope.selauth = null;
+    $scope.sn = null;
+    $scope.uuid = null;
+    $scope.datetimeperiod = null;
+    $scope.mprotocol = null;
+    $scope.mmodule = null;
+    $scope.datetime = null;
+    $scope.datetimeperiodshow = false;
+    $scope.enable = false;
     $scope.selectedRows = [];
+    $scope.disVersion = [{"id":1000,"name":"trial"},{"id":1001,"name":"standard"}];
 
     $scope.gridOptions = {
         enableFiltering: true,
@@ -98,6 +108,119 @@ function CaseSelectorController($scope, $rootScope, $location, $cookieStore, $ht
 
         document.body.removeChild(element);
     };
+
+    $scope.downloadSelectedfordes3 = function(){
+        console.log($scope.gridOptions.data);
+        $scope.updateSelectedRows();
+        var jsonStringToBeSave = JSON.stringify($scope.selectedRows);
+
+        $http({
+            url:"rest/transcontenttestcase",
+            method: "POST",
+            data:{
+                data: jsonStringToBeSave
+            }
+        })
+            .success(function(data){
+                    console.log(data);
+                    if(data !="fail"){
+                        var element = document.createElement('a');
+                        element.setAttribute('href', 'des3/testcase.des3');
+                        // element.setAttribute('href',  'testcase.des3');
+                        element.setAttribute('download', "testcase.des3");
+
+                        element.style.display = 'none';
+                        document.body.appendChild(element);
+
+                        element.click();
+
+                        document.body.removeChild(element);
+                    }else{
+                        console.log(data);
+                    }
+                }
+            )
+
+            .error(function(err){
+                console.log(err);
+            })
+
+
+    };
+
+    // $scope.$watch("datetime", function( newVal, oldVal){
+    //    if(newVal !=oldVal  && newVal){
+    //        var choicedate = new Date(newVal);
+    //        console.log(choicedate.getDate());
+    //        console.log(choicedate.getFullYear());
+    //        console.log(choicedate.getMonth());
+    //        $scope.datetime = newVal;
+    //        $scope.calDateTimePeriod();
+    //    }
+    // })
+
+    $scope.calDateTimePeriod = function(){
+        console.log($scope.datetime);
+        if(angular.isUndefined($scope.datetime)){
+            alert("Please pick a datetime")
+        }else{
+            var startDate = new Date();
+            var endDate = new Date($scope.datetime);
+            var divnum = 1000*3600*24;
+            $scope.datetimeperiod = parseInt(endDate.getTime() - startDate.getTime())/divnum;
+            if($scope.datetimeperiod < 0){
+                alert("Please choice a date bigger than today, thank you!");
+            }else{
+                $scope.datetimeperiod = Math.ceil($scope.datetimeperiod).toString() +"d";
+                $scope.datetimeperiodshow = true;
+            }
+        }
+    };
+
+    $scope.createBtnEnable = function(){
+        $scope.enable = angular.isUndefined($scope.sn) || angular.isUndefined($scope.uuid) || angular.isUndefined($scope.selauth) || angular.isUndefined($scope.datetime) || angular.isUndefined($scope.datetimeperiod) || angular.isUndefined($scope.        $scope.enable = angular.isUndefined($scope.sn) || angular.isUndefined($scope.uuid) || angular.isUndefined($scope.selauth) || angular.isUndefined($scope.datetime) || angular.isUndefined($scope.datetimeperiod) || angular.isUndefined($scope.authorizedEdtion));
+
+        console.log($scope.sn);
+        console.log(angular.isUndefined($scope.sn))
+        console.log("btn enable: " + $scope.enable.toString());
+        if($scope.enable){
+            return false;
+        }else{
+            return true;
+        }
+    };
+
+    $scope.generateLicenseDes = function(){
+        console.log($scope.authorizedEdtion.name);
+        console.log({'sn':$scope.sn,'uuid':$scope.uuid, 'authorizedFor':$scope.selauth, "authorizedEdtion": "trial",'authorizedDate':$scope.datetime,'authorizedPeriod':$scope.datetimeperiod,'protocol':'all','module':'all'})
+            $http({method: 'POST',
+                url: 'rest/license',
+                data: {
+                    data: {'sn':$scope.sn,'uuid':$scope.uuid, 'authorizedFor':$scope.selauth, "authorizedEdtion": $scope.authorizedEdtion.name,'authorizedDate':$scope.datetime,'authorizedPeriod':$scope.datetimeperiod,'protocol':'all','module':'all'}
+                    }
+            })
+                .success(function (data) {
+                    console.log(data);
+                    if(data.data !="fail"){
+                        var element = document.createElement('a');
+                        element.setAttribute('href', 'des3/License.des3');
+                        // element.setAttribute('href',  'testcase.des3');
+                        element.setAttribute('download', "License.des3");
+
+                        element.style.display = 'none';
+                        document.body.appendChild(element);
+
+                        element.click();
+
+                        document.body.removeChild(element);
+                    }else{
+                        console.log(data);
+                    }
+                })
+                .error(function (data) {
+                    console.log(data);
+                })
+    }
 
     $scope.gridOptions.onRegisterApi = function(gridApi){
         //set gridApi on scope

@@ -1,3 +1,69 @@
 <div class="page-header">
 	<h3>Lic-Generator</h3>
-</div>
+
+	<div class="container" ng-app="myApp" ng-controller="myCtrl">
+			<h2 class="bg-info">获取license 画面</h2>
+			<table class="table table-striped">
+				<tr>
+					<td style="width:150px">
+						<h5 class="form-signin-heading">请输入设备SN号码:</h5>
+					</td>
+					<td style="width:400px">
+						<label for="inputSN" class="sr-only">请输入设备SN号码:</label>
+						<input name="sn" type="text" id="inputSN" class="form-control" placeholder="00000000" required autofocus>
+					</td>
+					<td style="width:120px">
+						<h5>UUID:</h5>
+					</td>
+					<td>
+						<input type="text" class="form-control" value="" name="uuid" ng-model="uuid">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h5 class="form-signin-heading">选择截止时间:</h5>
+						<label for="dtp_input2" class="sr-only">选择截止时间:</label>
+					</td>
+					<td>
+						<div class="input-group date form_date col-md-5" style="width:400px" data-date="" data-date-format="dd MM yyyy"
+							 data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+							<input datetimez class="form-control" size="16" type="text" value="" ng-model="datetime" name="datetime"
+								   ng-change="calDateTimePeriod()" readonly>
+							<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+							<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+						</div>
+						<calendar></calendar>
+					</td>
+					<td>
+						<h5 ng-show="datetimeperiodshow">有效天數：</h5>
+					</td>
+					<td>
+						<input class="form-control" type="text" ng-model="datetimeperiod" name="datetimeperiod" value="datetimeperiod"
+							   ng-show="datetimeperiodshow" readonly>
+
+					</td>
+				</tr>
+				<tr>
+
+					<td>
+						<h5>请输入授权单位:</h5>
+					</td>
+
+					<td><input type="text" value="" class="form-control" name="selauth" placeholder="authorizedFor"></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>
+						<input type="hidden" id="dtp_input2" value=""/><br/>
+						<input class="btn btn-info" type="submit" value="生成license文件">
+					</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+
+		</div>
+
+	</div>

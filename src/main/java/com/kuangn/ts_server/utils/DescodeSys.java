@@ -141,21 +141,19 @@ public class DescodeSys {
         /*
         create license json file
         */
-        System.out.println(map.getClass());
         if(map==null) {
              return "licence have something value is empty" ;
         }else{
             try {
 //                File file = new File("/opt/apache-tomcat-8.0.35/webapps/ts-server/des3/license.json");
                 File file = new File("/var/ts-server/webapps/ts-server/des3/license.json");
-//                File file = new File("/home/alfred/ts-server/src/main/webapp/des3/license.json");
-                if(file.exists()){
+                /*if(file.exists()){
                     try {
                         file.delete();
                     }catch(Exception e){
                         e.printStackTrace();
                     }
-                }
+                }*/
 
                 file.createNewFile();
                 Date d = new Date();

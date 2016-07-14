@@ -33,11 +33,11 @@ public class License {
 //            return "fail";
             return map;
         }
-        String jsonpath1 = "/var/ts-server/webapps/ts-server/des3/license.json";
+        String jsonpath1 = "des3/license.json";
 //        String jsonpath1 = "/home/alfred/ts-server/webapps/ts-server/des3/license.json";
 //        String jsonpath1 = "/opt/apache-tomcat-8.0.35/webapps/ts-server/des3/license.json";
 //        String des3path1 = "/opt/apache-tomcat-8.0.35/webapps/ts-server/des3/License.des3";
-        String des3path1 = "/var/ts-server/webapps/ts-server/des3/License.des3";
+        String des3path1 = "des3/License.des3";
 //        String des3path1 = "/home/alfred/ts-server/webapps/ts-server/des3/License.des3";
         DescodeSys descodeSys = new DescodeSys();
         String retcreatejson = null;

@@ -6,7 +6,8 @@ var app = angular.module('exampleApp', [
     'ui.grid',
     'ui.grid.selection',
 	'ui.grid.resizeColumns',
-	'darthwade.dwLoading'
+	'darthwade.dwLoading',
+	'720kb.datepicker'
 ])
     .config(
 		[ '$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {

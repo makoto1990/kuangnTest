@@ -17,6 +17,7 @@ public class DescodeSys {
         File file = new File(filepath);
         if (file.exists()) {
             try {
+                String oriPath = System.getProperty("user.dir");
 //                Process p = Runtime.getRuntime().exec("tar -zcvf -  " + filepath + "|openssl des3 -salt -k kuangn | dd of=kuangn.des3");
                 Runtime rt = Runtime.getRuntime();
                 BufferedReader input = null;
@@ -24,13 +25,18 @@ public class DescodeSys {
                 Process pr = null;
                 StringBuffer stdout = new StringBuffer();
                 StringBuffer stderr = new StringBuffer();
+                String[] arr = filepath.split("/");
+                String filename = arr[arr.length - 1]
+;                System.out.println(filename);
 
 
-//                String command = "tar -zcvf - " + filepath+ "|"+"openssl des3 -salt -k kuangn"+"|"+ " dd of=License.des3";
-                String command = "tar -zcvf - " + filepath+ "|"+"openssl des3 -salt -k kuangn"+"|"+ " dd of=" + destfile;
-                System.out.println(command);
+//                String command = "tar -zcvf - " + filepath+ "|"+"openssl des3 -salt -k kuangn"+"|"+ " dd of=License.des3";sss
+                String command = "tar -zcvf - " + filename+ "|"+"openssl des3 -salt -k kuangn"+"|"+ " dd of=" + destfile;
+                int exitVal = execcommand("cd /var/ts-server/webapps/ts-server/des3;"+command);
+//                int exitVal = execcommand("cd /home/alfred/ts-server/src/main/webapp/des3/;"+command);
+                execcommand("cd " +oriPath);
 
-                pr = rt.exec(new String[]{"bash","-c",command});
+               /* pr = rt.exec(new String[]{"bash","-c",command});
                 input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
                 err = new BufferedReader(new InputStreamReader(pr.getErrorStream()));
                 String line = null;
@@ -46,7 +52,8 @@ public class DescodeSys {
                 }
                 pr.waitFor();
                 int exitVal = pr.exitValue();
-                System.out.println("Process exit value is: " + exitVal);
+                execcommand("cd " +path);
+                System.out.println("Process exit value is: " + exitVal);*/
                 return exitVal;
             } catch (Exception e) {
                 System.out.println(e.toString());
@@ -57,6 +64,8 @@ public class DescodeSys {
             return 1;
         }
     }
+
+
 
     public int decode() {
         /*find the latest des3 file in upload folder then  decode*/
@@ -146,6 +155,7 @@ public class DescodeSys {
         }else{
             try {
 //                File file = new File("/opt/apache-tomcat-8.0.35/webapps/ts-server/des3/license.json");
+//                File file = new File("/home/alfred/ts-server/src/main/webapp/des3/license.json");
                 File file = new File("/var/ts-server/webapps/ts-server/des3/license.json");
                 /*if(file.exists()){
                     try {
@@ -198,12 +208,6 @@ public class DescodeSys {
           System.out.println(str);
 //          System.out.println(System.getProperty("user.dir"));
           File file = new File("/var/ts-server/webapps/ts-server/des3/testcase.json");
-//          File file = new File("/opt/apache-tomcat-8.0.35/webapps/ts-server/des3/testcase.json");
-          try {
-              System.out.println(file.getCanonicalPath());
-          }catch(Exception e){
-              e.printStackTrace();
-          }
 
           try{
               file.createNewFile();
@@ -230,6 +234,14 @@ public class DescodeSys {
         String s ;
         s = DateFormat.getDateInstance(DateFormat.MEDIUM).format(t);
         System.out.println(s);*/
+
+/*        String path = "/home/alfred/ts-server/src/main/webapp/des3/license.json";
+        String[] arr = path.split("/");
+        System.out.println(arr[arr.length -1]);
+       *//* for(int i=0;i<arr.length;i++) {*/
+//            System.out.println(arr[i]);
+//        }*/
+//        descodeSys.execcommand("ls");
 //    }
 
 }

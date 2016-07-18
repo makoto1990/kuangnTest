@@ -25,6 +25,7 @@
     "angular-cookies": "^1.5.6",
     "angular-touch": "^1.5.6",
     "angular-animate": "^1.5.6",
-    "angular-loading": "^0.1.4"
+    "angular-loading": "^0.1.4",
+    "angularjs-datepicker": "^2.1.6"
   }
 }
